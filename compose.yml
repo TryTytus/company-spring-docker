@@ -1,0 +1,26 @@
+services:
+  spring:
+    image: trytytus/company-spring:latest
+    ports:
+      - 8081:8081
+    depends_on:
+      - postgres
+      - keycloak
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_USER=myuser'
+    ports:
+      - '5432:5432'
+  keycloak:
+    image: keycloak/keycloak
+    ports:
+      - '8080:8080'
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command: ["-Dkeycloak.migration.action=import", "-Dkeycloak.migration.provider=singleFile", "-Dkeycloak.migration.file=/opt/keycloak/data/import/realm-export.json", "-Dkeycloak.migration.strategy=IGNORE_EXISTING", "start-dev", "--hostname=keycloak", "--hostname-strict-backchannel=true", "--hostname-admin=localhost"]
+    volumes:
+      - ./docker/import:/opt/keycloak/data/import
