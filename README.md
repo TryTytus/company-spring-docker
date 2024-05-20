@@ -20,8 +20,8 @@ cd company-spring-docker
 
 ### run with docker compose
 
->![IMPORTANT]
-> startup may take some time
+> ![IMPORTANT]
+>  startup may take some time
 
 
 ```bash
