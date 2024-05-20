@@ -20,7 +20,7 @@ cd company-spring-docker
 
 ### run with docker compose
 
-> ![IMPORTANT]
+> [!IMPORTANT]
 >  startup may take some time
 
 
